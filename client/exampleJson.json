@@ -1,0 +1,10 @@
+{
+	"beaches": {
+		"12th street": {
+			"status": "no-restriction"
+		},
+		"Fargo": {
+			"status": "swim-ban"
+		},
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "html-to-json": "^0.6.0",
+    "jquery": "^3.2.1",
+    "request": "^2.81.0"
+  }
+}
