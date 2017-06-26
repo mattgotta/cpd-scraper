@@ -1,28 +1,20 @@
-var request = require('request');
-var htmlToJson = require('html-to-json');
+const request = require('request');
+const htmlparser = require('htmlparser');
+const util = require('util');
 
 
-
-request('http://www.google.com', function (error, response, body) {
+request('http://www.cpdbeaches.com/home.cfm', function (error, response, body) {
   console.log('error:', error); // Print the error if one occurred 
   //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
   //console.log('body:', body); // Print the HTML for the Google homepage. 
-	var promise = htmlToJson.parse('<div>content</div>', {
-		'text': function ($doc) {
-			return $doc.find('div').text();
-		}, function (err, result) {
-			console.log(result)
-		}
-	})
-	promise.done(function(result) {
-		console.log('doneso')
-	})
-});
-
-var promise = htmlToJson.request('http://prolificinteractive.com/team', {
-  'images': ['div', function ($img) {
-    return $img.attr('alt');
-  }]
-}, function (err, result) {
-  console.log(result);
+	var rawHtml = body;
+	var handler = new htmlparser.DefaultHandler(function (error, dom) {
+	    if (error)
+	        [console.log(error)]
+	    else
+	        [console.log('done')]
+	});
+	var parser = new htmlparser.Parser(handler);
+	parser.parseComplete(rawHtml);
+	console.log(util.inspect(handler.dom, false, null));
 });
